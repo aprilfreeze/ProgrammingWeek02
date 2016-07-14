@@ -6,7 +6,7 @@ public class PlayerHUD : MonoBehaviour
 {
     private static PlayerHUD sInstance;
     //reset score
-    public PlayerController youDied;
+    public PlayerRespawn youDied;
 
     public static PlayerHUD Instance
     {
@@ -37,7 +37,7 @@ public class PlayerHUD : MonoBehaviour
     public void Update()
     {
         //reset score if dead
-        if( GameObject.Find( "RollerBall" ).GetComponent<PlayerController>().isDead )
+        if( GameObject.Find( "RollerBall" ).GetComponent<PlayerRespawn>().isDead )
         {
             Debug.Log( "ya dead son" );
             if( Score != 0 )
@@ -49,7 +49,7 @@ public class PlayerHUD : MonoBehaviour
                 ScoreField.text = "Score: " + Score;
             }
             GameObject dead = GameObject.FindGameObjectWithTag( "Player");
-            youDied = dead.GetComponent<PlayerController>();
+            youDied = dead.GetComponent<PlayerRespawn>();
             youDied.isDead = false;
         }
     }
@@ -57,7 +57,7 @@ public class PlayerHUD : MonoBehaviour
     public void AdjustScore(int value)
     {
         //otherwise score +- normally
-        if( !GameObject.Find( "RollerBall" ).GetComponent<PlayerController>().isDead)
+        if( !GameObject.Find( "RollerBall" ).GetComponent<PlayerRespawn>().isDead)
         {
             Debug.Log( "yay ur alive" );
             Score += value;
